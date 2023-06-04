@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <title>帅捷</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Boxiocns CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <!-- <link rel="stylesheet" href="./countdown.css"> -->
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <style>
+.sidebar{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 260px;
+  background: #333;
+  z-index: 100;
+  transition: all 0.5s ease;
+}
+.sidebar.close{
+  width: 78px;
+}
+.sidebar .logo-details{
+  height: 60px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.sidebar .logo-details i{
+  font-size: 30px;
+  color: #fff;
+  height: 50px;
+  min-width: 78px;
+  text-align: center;
+  line-height: 50px;
+}
+.sidebar .logo-details .logo_name{
+  font-size: 22px;
+  color: #fff;
+  font-weight: 600;
+  transition: 0.3s ease;
+  transition-delay: 0.1s;
+}
+.sidebar.close .logo-details .logo_name{
+  transition-delay: 0s;
+  opacity: 0;
+  pointer-events: none;
+}
+.sidebar .nav-links{
+  height: 100%;
+  padding: 30px 0 150px 0;
+  overflow: auto;
+}
+.sidebar.close .nav-links{
+  overflow: visible;
+}
+.sidebar .nav-links::-webkit-scrollbar{
+  display: none;
+}
+.sidebar .nav-links li{
+  position: relative;
+  list-style: none;
+  transition: all 0.4s ease;
+}
+.sidebar .nav-links li:hover{
+  background: #1d1b31;
+}
+.sidebar .nav-links li .iocn-link{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.sidebar.close .nav-links li .iocn-link{
+  display: block
+}
+.sidebar .nav-links li i{
+  height: 50px;
+  min-width: 78px;
+  text-align: center;
+  line-height: 50px;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.sidebar .nav-links li.showMenu i.arrow{
+  transform: rotate(-180deg);
+}
+.sidebar.close .nav-links i.arrow{
+  display: none;
+}
+.sidebar .nav-links li a{
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+.sidebar .nav-links li a .link_name{
+  font-size: 18px;
+  font-weight: 400;
+  color: #fff;
+  transition: all 0.4s ease;
+}
+.sidebar.close .nav-links li a .link_name{
+  opacity: 0;
+  pointer-events: none;
+}
+.sidebar .nav-links li .sub-menu{
+  padding: 6px 6px 14px 80px;
+  margin-top: -10px;
+  background: #1d1b31;
+  display: none;
+}
+.sidebar .nav-links li.showMenu .sub-menu{
+  display: block;
+}
+.sidebar .nav-links li .sub-menu a{
+  color: #fff;
+  font-size: 15px;
+  padding: 5px 0;
+  white-space: nowrap;
+  opacity: 0.6;
+  transition: all 0.3s ease;
+}
+.sidebar .nav-links li .sub-menu a:hover{
+  opacity: 1;
+}
+.sidebar.close .nav-links li .sub-menu{
+  position: absolute;
+  left: 100%;
+  top: -10px;
+  margin-top: 0;
+  padding: 10px 20px;
+  border-radius: 0 6px 6px 0;
+  opacity: 0;
+  display: block;
+  pointer-events: none;
+  transition: 0s;
+}
+.sidebar.close .nav-links li:hover .sub-menu{
+  top: 0;
+  opacity: 1;
+  pointer-events: auto;
+  transition: all 0.4s ease;
+}
+.sidebar .nav-links li .sub-menu .link_name{
+  display: none;
+}
+.sidebar.close .nav-links li .sub-menu .link_name{
+  font-size: 18px;
+  opacity: 1;
+  display: block;
+}
+.sidebar .nav-links li .sub-menu.blank{
+  opacity: 1;
+  pointer-events: auto;
+  padding: 3px 20px 6px 16px;
+  opacity: 0;
+  pointer-events: none;
+}
+.sidebar .nav-links li:hover .sub-menu.blank{
+  top: 50%;
+  transform: translateY(-50%);
+}
+.sidebar .profile-details{
+  position: fixed;
+  bottom: 0;
+  width: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #1d1b31;
+  padding: 6px 0;
+  transition: all 0.5s ease;
+}
+.sidebar.close .profile-details{
+  background: none;
+}
+.sidebar.close .profile-details{
+  width: 78px;
+}
+.sidebar .profile-details .profile-content{
+  display: flex;
+  align-items: center;
+}
+.sidebar .profile-details img{
+  height: 52px;
+  width: 52px;
+  object-fit: cover;
+  border-radius: 16px;
+  margin: 0 14px 0 12px;
+  background: #1d1b31;
+  transition: all 0.5s ease;
+}
+.sidebar.close .profile-details img{
+  padding: 10px;
+}
+.sidebar .profile-details .profile_name,
+.sidebar .profile-details .job{
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.sidebar.close .profile-details i,
+.sidebar.close .profile-details .profile_name,
+.sidebar.close .profile-details .job{
+  display: none;
+}
+.sidebar .profile-details .job{
+  font-size: 12px;
+}
+.home-section{
+  position: relative;
+  background: #333;
+  left: 260px;
+  width: calc(100% - 260px);
+  transition: all 0.5s ease;
+}
+.sidebar.close ~ .home-section{
+  left: 78px;
+  width: calc(100% - 78px);
+}
+.home-section .home-content{
+  position: fixed;
+  z-index: 99;
+  background-color: #333;
+  width: 100%;
+  height: 75px;
+  display: flex;
+  top: 0px;
+  align-items: center;
+}
+.home-section .home-content .bx-menu,
+.home-section .home-content .text{
+  color: #f2f2f2;
+  font-size: 35px;
+}
+.home-section .home-content .bx-menu{
+  margin: 0 15px;
+  cursor: pointer;
+}
+.home-section .home-content .text{
+  font-size: 26px;
+  font-weight: 600;
+}
+div.container1 {
+	max-width: 1500px;
+	margin: 0 auto;
+	padding: 0 20px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.input {
+  width: 100%;
+  max-width: 420px;
+  height: 7px;
+  padding: 12px;
+  margin-left: 80px;
+  border-radius: 12px;
+  border: 1.5px solid lightgrey;
+  outline: none;
+  transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  box-shadow: 0px 0px 20px -18px;
+}
+
+.input:hover {
+  border: 2px solid lightgrey;
+  box-shadow: 0px 0px 20px -17px;
+}
+
+.input:active {
+  transform: scale(0.95);
+}
+
+.input:focus {
+  border: 2px solid grey;
+}
+nav ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	display: flex;
+}
+nav ul li {
+	margin: 0 10px;
+}
+nav ul li a {
+	display: block;
+	color: #fff;
+	text-decoration: none;
+	padding: 10px;
+	transition: background-color 0.3s ease;
+	border-radius: 5px;
+}
+nav ul li a:hover {
+	background-color: #555;
+}
+/* 设置主要内容区域样式 */
+.bianlan{
+  width: 100px;
+  height: 619px;
+  display: flex;
+  float: right;
+  margin: 0 75px 0 75px;
+
+}
+.social-links{
+  display: block;
+  justify-content: center;
+  margin: 20px;
+}
+.flex-center{
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+}
+.social-btn {
+  cursor: pointer;
+  height: 75px;
+  width: 75px;
+  font-family: 'Titillium Web', sans-serif;
+  color: #333;
+  border-radius: 10px;
+  box-shadow: 0px 10px 10px rgba(0,0,0,0.1);
+  background: white;
+  margin: 5px 5px 45px 5px;
+  transition: 0.3s;
+  justify-content: center;
+  opacity: 90%;
+}
+.social-btn span {
+  width: 0px;
+  overflow: hidden;
+  transition: 0.3s;
+  text-align: center;
+  margin-left: 5px;
+  color: #f2f2f2;
+}
+.social-btn:hover {
+  width: 100px;
+  border-radius: 5px;
+  background: #444;
+  height: 50px;
+}
+.social-btn:hover span {
+  padding: 2px;
+  width: 50px;
+}
+.button-con {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  border-radius: 12px;
+}
+.box {
+  width: 85px;
+  height: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  font-weight: 700;
+  color: #0f0f0f;
+  transition: all .8s;
+  cursor: pointer;
+  position: relative;
+  background: #fff;
+  overflow: hidden;
+  opacity: 95%;
+}
+#zuo{
+  border-radius: 12px 0  0 12px;
+}
+#you{
+  border-radius: 0 12px 12px 0;
+}
+.box:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  background: #444;
+  color: #fff;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(100%);
+  transition: transform .4s;
+}
+.box:nth-child(2)::before {
+  transform: translateY(-100%);
+  content: '';
+}
+.box:nth-child(3)::before {
+  content: '';
+}
+.box:nth-child(4)::before {
+  transform: translateY(-100%);
+  content: '';
+}
+.box:nth-child(5)::before {
+  content: '';
+}
+.box:nth-child(6)::before {
+  transform: translateY(-100%);
+  content: '';
+}
+.box:nth-child(7)::before {
+  content: '阅';
+}
+.box:nth-child(8)::before {
+  transform: translateY(-100%);
+  content: '读';
+}
+.box:nth-child(9)::before {
+  content: '';
+}
+.box:nth-child(10)::before {
+  transform: translateY(-100%);
+  content: '';
+}
+.box:nth-child(11)::before {
+  content: '';
+}
+.box:nth-child(12)::before {
+  transform: translateY(-100%);
+  content: '';
+}
+.box:nth-child(13)::before {
+  content: '';
+}
+.box:nth-child(14)::before {
+  transform: translateY(-100%);
+  content: '';
+}
+.button-con:hover .box:before {
+  transform: translateY(0);
+}
+[section=section] {
+	background-color: #f7f7f7;
+	padding: 50px 0;
+  background-image: url('./colour__.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+.container2 {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 20px;
+}
+[title] {
+	font-size: 36px;
+	font-weight: bold;
+	color: #333;
+	text-align: center;
+	margin-bottom: 40px;
+}
+h3+p {
+	font-size: 16px;
+	line-height: 1.6;
+	color: #666;
+	margin-bottom: 40px;
+}
+#row {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: stretch;
+	justify-content: space-between;
+}
+.card {
+  position: relative;
+  width: calc(33.33% - 20px);
+  height: 250px;
+  background: #f2f2f2;
+  overflow: hidden;
+  border-radius: 20px;
+  margin: 10px;
+  transition: 0.3s;
+  opacity: 90%;
+}
+.biaoyu1{
+  height: 180px;
+  overflow: hidden;
+  background-color:#ef475d ;
+}
+.biaoyu2{
+  height: 180px;
+  overflow: hidden;
+  background-color:#1661ab ;
+}
+.biaoyu3{
+  height: 180px;
+  overflow: hidden;
+  background-color:#12aa9c ;
+}
+.biaoyu4{
+  height: 180px;
+  overflow: hidden;
+  background-color:#d2b42c ;
+}
+.biaoyu5{
+  height: 180px;
+  overflow: hidden;
+  background-color:#5d3131 ;
+}
+.biaoyu6{
+  height: 180px;
+  overflow: hidden;
+  background-color:#b7511d ;
+}
+.temporary_text {
+  font-weight: bold;
+  font-size: 26px;
+  padding: 6px 12px;
+  color: #f8f8f8;
+}
+.card_content {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 95%;
+  padding: 10px;
+  border-top-left-radius: 20px;
+  transform: translateY(170px);
+  transition: transform .4s;
+  background-color: #333;
+}
+
+.card_title {
+  color: #f2f2f2;
+  line-height: 15px;
+  transition: 0.3s;
+  margin-top: 5px;
+  display:block;
+  font-weight: bold;
+  width: 60px;
+}
+.card_subtitle {
+  display: block;
+  font-size: 10px;
+  margin-bottom: 5px;
+  color: #888;
+  transition: 0.3s;
+}
+.card_description {
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity .5s;
+  color: #f2f2f2;
+  display: block;
+}
+.card:hover .card_title{
+  font-size: 25px;
+  transition: 0.3s;
+  margin-top: 2px;
+}
+.card:hover #title1{
+  transition: 0.5s;
+  background-color: #ef475d;
+  border: medium solid #ef475d;
+  border-radius: 8px;
+}
+.card:hover #title2{
+  transition: 0.5s;
+  background-color: #1661ab;
+  border: medium solid #1661ab;
+  border-radius: 8px;
+}
+.card:hover #title3{
+  transition: 0.5s;
+  background-color: #12aa9c;
+  border: medium solid #12aa9c;
+  border-radius: 8px;
+}
+.card:hover #title4{
+  transition: 0.5s;
+  background-color: #d2b42c;
+  border: medium solid #d2b42c;
+  border-radius: 8px;
+}
+.card:hover #title5{
+  transition: 0.5s;
+  background-color: #5d3131;
+  border: medium solid #5d3131;
+  border-radius: 8px;
+}
+.card:hover #title6{
+  transition: 0.5s;
+  background-color: #b7511d;
+  border: medium solid #b7511d;
+  border-radius: 8px;
+}
+.card:hover .card_content {
+  transform: translateY(20px);
+  border-radius: 0%;
+  transition: 0.5s;
+}
+.card:hover .card_subtitle{
+  opacity: 0;
+  display: none;
+  transition: 0.3s;
+  margin-bottom: 0;
+}
+.card:hover .card_description {
+  opacity: 1;
+  transition-delay: .25s;
+  border-radius: 15px;
+  border: solid #777;
+  text-indent: 1em;
+}
+#card1:hover{
+  background-color: #ef475d;
+  transition: 0.3s;
+  border-radius: 13% 2% 0 0;
+}
+#card2:hover{
+  background-color: #1661ab;
+  transition: 0.3s;
+  border-radius: 13% 2% 0 0;
+}
+#card3:hover{
+  background-color: #12aa9c;
+  transition: 0.3s;
+  border-radius: 13% 2% 0 0;
+}
+#card4:hover{
+  background-color: #d2b42c;
+  transition: 0.3s;
+  border-radius: 13% 2% 0 0;
+}
+#card5:hover{
+  background-color: #5d3131;
+  transition: 0.3s;
+  border-radius: 13% 2% 0 0;
+}
+#card6:hover{
+  background-color: #b7511d;
+  transition: 0.3s;
+  border-radius: 13% 2% 0 0;
+}
+.tools {
+ display:inline-flex;
+ padding: 3px;
+}
+.circle {
+ padding: 0 4px;
+}
+.box1 {
+ display: inline-block;
+ align-items: center;
+ width: 10px;
+ height: 10px;
+ padding: 1px;
+ border-radius: 50%;
+ transition: 0.5s;
+}
+.red {
+ background-color: #ff605c;
+}
+.yellow {
+ background-color: #ffbd44;
+}
+.green {
+ background-color: #00ca4e;
+}
+.card:hover .box1{
+  width: 50px;
+  border-radius: 5px;
+  transition: 0.5s;
+}
+/* 页脚整体样式 */
+header,footer {
+  background-color: #333;
+  color: #fff;
+  padding: 20px 0;
+  /* opacity: 90%; */
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+.footer-links li {
+  margin-left: 20px;
+}
+.footer-links li:first-child {
+  margin-left: 0;
+}
+.footer-links a {
+  color: #888;
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+  transition: background-color 0.3s ease;
+  border-radius: 5px;
+}
+.footer-links a:active{
+  color: #fff;
+}
+.footer-links a:hover{
+  background-color: #555;
+  color: #fff;
+}
+.footer-text {
+  margin: 0;
+  color: #888;
+  font-size: 14px;
+}
+[fff]{
+    color: #888;
+}
+.button {
+  margin: 0;
+  height: auto;
+  background: transparent;
+  padding: 0;
+  border: none;
+  color: #f0f0f0;
+}
+.button {
+  --border-right: 6px;
+  --text-stroke-color: #fff;
+  --animation-color: #fff;
+  --fs-size: 2em;
+  letter-spacing: 3px;
+  text-decoration: none;
+  font-size: var(--fs-size);
+  font-family: "Arial";
+  position: relative;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--text-stroke-color);
+} 
+.hover-text {
+  position: absolute;
+  box-sizing: border-box;
+  content: attr(data-text);
+  color: var(--animation-color);
+  width: 0%;
+  inset: 0;
+  border-right: var(--border-right) solid var(--animation-color);
+  overflow: hidden;
+  transition: 0.5s;
+  -webkit-text-stroke: 1px var(--animation-color);
+}
+.input1 {
+  width: 100%;
+  max-width: 150px;
+  height: 5px;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1.5px solid lightgrey;
+  outline: none;
+  transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  box-shadow: 0px 0px 20px -18px;
+}
+.button:hover .hover-text {
+  width: 100%;
+  filter: drop-shadow(0 0  var(--animation-color))
+} 
+body{
+  margin: 0px;
+}
+.out {
+  width: 1095px;
+  height: 200px;
+  padding: 40px;
+  /* position: relative; */
+  margin: 0 auto;
+  top: 100px;
+  background-color: #444;
+  border-radius: 20px;
+}
+.out .inner {
+  display: flex;
+  width: 63%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.out .inner .img {
+  width: 400px;
+  height: 200px;
+  position: absolute;
+  transition: 0.3s;
+}
+.out .inner .img img {
+  width: 100%;
+  height: 100%;
+}
+.out .arrow {
+  font-size: 32px;
+}
+.out .arrow i {
+  position: absolute;
+  color: #fff;
+  z-index: 9999;
+  cursor: pointer;
+  top: 84px;
+}
+.out .arrow .left {
+  left: 0;
+}
+.out .arrow .right {
+  left: 780px;
+}
+.out .button {
+  width: 175px;
+  height: 15px;
+  position: absolute;
+  z-index: 9999;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.out .button p {
+  width: 15px;
+  height: 15px;
+  float: left;
+  margin: 0 5px;
+  cursor: pointer;
+  background-color: silver;
+}
+.out .button p:first-child {
+  background-color: #1486bb;
+}
+.out #last {
+  transform: translateX(0);
+  z-index: 9;
+  opacity: 1;
+}
+.out #first {
+  transform: translateX(200px) scale(1.3);
+  z-index: 99;
+  opacity: 1;
+}
+.out #second {
+  transform: translateX(400px);
+  z-index: 9;
+  opacity: 1;
+}
+.out #left {
+  transform: translateX(-100px);
+  z-index: 1;
+  opacity: 0;
+}
+.out #right {
+  transform: translateX(500px);
+  z-index: 1;
+  opacity: 0;
+}
+#clock {
+    display: flex;
+    float: right;
+    align-items: center;
+    justify-content: center;
+    /* width: 50rem;
+    height: 10rem; */
+    font-size: 3rem;
+    color: #ECEFF4;
+    font-weight: bold;
+    text-shadow: 0px 0px 10px #ECEFF4;
+    /* background-color: #1F2027; */
+    border-radius: 20%;
+    border: #0f0f0f;
+    /* padding: 1rem; */
+}
+
+#clock div {
+    display: flex;
+    /* position: absolute; */
+    left: 20px;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    flex-direction: row;
+    text-align: center;
+    margin: 0 1rem;
+}
+
+#clock div span {
+    font-size: 1.3rem;
+    padding: 0.5rem;
+    color: #f2f2f2;
+    text-shadow: none;
+}
+
+#clock div span:not(:last-child)::after {
+    content: "";
+    padding-left: 0.5rem;
+}
+
+#clock div span:first-child {
+    margin-right: 0.5rem;
+}
+
+#clock div span:last-child {
+    margin-left: 0.5rem;
+}
+.kongge{
+  width: 10px;
+  height: 70%;
+  background-color: #f2f2f2;
+  border-radius: 20px;
+  margin-left: 50px;
+}
+     </style>
+   </head>
+<body>
+  <div class="sidebar">
+    <div class="logo-details">
+      <i class='bx bxl-c-plus-plus'></i>
+      <span class="logo_name">帅捷</span>
+    </div>
+    <ul class="nav-links">
+      <li>
+        <a href="#">
+          <i class='bx bx-grid-alt' ></i>
+          <span class="link_name">PartOne</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="#">模块一</a></li>
+        </ul>
+      </li>
+      <li>
+        <div class="iocn-link">
+          <a href="#">
+            <i class='bx bx-collection' ></i>
+            <span class="link_name">PartTwo</span>
+          </a>
+          <i class='bx bxs-chevron-down arrow' ></i>
+        </div>
+        <ul class="sub-menu">
+          <li><a class="link_name" href="#">模块二</a></li>
+          <li><a href="#">HTML和CSS</a></li>
+          <li><a href="#">JavaScript</a></li>
+          <li><a href="#">网页设计</a></li>
+        </ul>
+      </li>
+      <li>
+        <div class="iocn-link">
+          <a href="#">
+            <i class='bx bx-book-alt' ></i>
+            <span class="link_name">PartThree</span>
+          </a>
+          <i class='bx bxs-chevron-down arrow' ></i>
+        </div>
+        <ul class="sub-menu">
+          <li><a class="link_name" href="#">模块三</a></li>
+          <li><a href="#">Web前端</a></li>
+          <li><a href="#">主打颜色</a></li>
+          <li><a href="#">网页创意</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">
+          <i class='bx bx-pie-chart-alt-2' ></i>
+          <span class="link_name">PartFour</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="#">模块四</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">
+          <i class='bx bx-line-chart' ></i>
+          <span class="link_name">PartFive</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="#">模块五</a></li>
+        </ul>
+      </li>
+      <li>
+        <div class="iocn-link">
+          <a href="#">
+            <i class='bx bx-plug' ></i>
+            <span class="link_name">PartSix</span>
+          </a>
+          <i class='bx bxs-chevron-down arrow' ></i>
+        </div>
+        <ul class="sub-menu">
+          <li><a class="link_name" href="#">模块六</a></li>
+          <li><a href="#">UI设计</a></li>
+          <li><a href="#">DCC软件入门</a></li>
+          <li><a href="#">游戏开发</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">
+          <i class='bx bx-compass' ></i>
+          <span class="link_name">PartSeven</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="#">模块七</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">
+          <i class='bx bx-history'></i>
+          <span class="link_name">History</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="#">历史记录</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">
+          <i class='bx bx-cog' ></i>
+          <span class="link_name">Setting</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="#">设置</a></li>
+        </ul>
+      </li>
+      <li>
+      </div>
+      <i class='bx bx-log-out' ></i>
+    </div>
+  </li>
+</ul>
+  </div>
+  <section class="home-section">
+    <div class="home-content">
+      <i class='bx bx-menu' ></i>
+      <button data-text="Awesome" class="button">
+        <span class="actual-text">&nbsp;MyWebsite&nbsp;</span>
+        <span class="hover-text" aria-hidden="true">&nbsp;MyWebsite&nbsp;</span>
+    </button>
+        <input placeholder="输入你要搜索的页面" type="text" name="text" class="input">
+        <div class="kongge"></div>
+        <div id="clock">
+          <div>
+            <span id="days">00</span>
+            <span>天</span>
+          </div>
+          <div>
+            <span id="hours">00</span>
+            <span>时</span>
+          </div>
+          <div>
+            <span id="minutes">00</span>
+            <span>分</span>
+          </div>
+          <div>
+            <span id="seconds">00</span>
+            <span>秒</span>
+          </div>
+        </div>
+  </section>
+<section section="section">
+  <div class="bianlan">
+    <div class="social-links">
+      <div class="social-btn flex-center">
+        <img src="./colour1__.png" alt=""><span>One</span>
+      </div>
+      <div class="social-btn flex-center">
+        <img src="./colour__2.png" alt=""><span>Two</span>
+      </div>
+  
+      <div class="social-btn flex-center">
+        <img src="./colour__3.png" alt=""><span>Three</span>
+    </div>
+      <div class="social-btn flex-center">
+        <img src="./colour__4.png" alt=""><span>Four</span>
+    </div>
+      <div class="social-btn flex-center">
+        <img src="./colour__5.png" alt=""><span>Five</span>
+    </div>
+  </div>
+  </div>
+        <div class="container2">
+            <div class="button-con">
+              <div class="box" id="zuo"></div>
+              <div class="box"></div>
+              <div class="box"></div>
+              <div class="box"></div>
+              <div class="box"></div>
+              <div class="box"></div>
+              <div class="box">内</div>
+              <div class="box">容</div>
+              <div class="box"></div>
+              <div class="box"></div>
+              <div class="box"></div>
+              <div class="box"></div>
+              <div class="box"></div>
+              <div class="box" id="you"></div>
+          </div>
+            <div id="row">
+              <article class="card" id="card1">
+                <div class="temporary_text"> 
+                  <div class="tools">
+                    <div class="circle">
+                      <span class="red box1"></span>
+                    </div>
+                    <div class="circle">
+                      <span class="yellow box1"></span>
+                    </div>
+                    <div class="circle">
+                      <span class="green box1"></span>
+                    </div>
+                  </div>
+                  <div class="card__content">
+                  </div>
+                </div>
+                <div class="biaoyu1"><div class="hello"></div></div>
+            <div class="card_content">
+                <span class="card_title" id="title1">标     题</span>
+                    <span class="card_subtitle">这是一段关于xxx的介绍，详情请点击查看。</span>
+                    <p class="card_description">以化学为例，化学家发现有两种氨基酸分子，他们的化学组成完全相同，区别只是原子的排列方式，他们被称之为L型和D型旋光异构体。理论上来说，由于他们的化学性质是相同的，都可以组成蛋白质。以化学为例，化学家发现有两种氨基酸分子，他们的化学组成完全相同，区别只是原子的排列方式，他们被称之为L型和D型旋光异构体。理论上来说，由于他们的化学性质是相同的，都可以组成蛋白质。以化学为例，化学家发现有两种氨基酸分子</p>
+            </div>
+            </article>
+            <article class="card" id="card2">
+              <div class="temporary_text">
+                <div class="tools">
+                  <div class="circle">
+                    <span class="red box1"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="yellow box1"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="green box1"></span>
+                  </div>
+                </div>
+                <div class="card__content">
+                </div>
+              </div>
+              <div class="biaoyu2"><div class="hello"></div></div>
+          <div class="card_content">
+              <span class="card_title" id="title2">标     题</span>
+                  <span class="card_subtitle">这是一段关于xxx的介绍，详情请点击查看。</span>
+                  <p class="card_description">以化学为例，化学家发现有两种氨基酸分子，他们的化学组成完全相同，区别只是原子的排列方式，他们被称之为L型和D型旋光异构体。理论上来说，由于他们的化学性质是相同的，都可以组成蛋白质。以化学为例，化学家发现有两种氨基酸分子，他们的化学组成完全相同，区别只是原子的排列方式，他们被称之为L型和D型旋光异构体。理论上来说，由于他们的化学性质是相同的，都可以组成蛋白质。以化学为例，化学家发现有两种氨基酸分子</p>
+          </article>
+          <article class="card" id="card3">
+            <div class="temporary_text">
+              <div class="tools">
+                <div class="circle">
+                  <span class="red box1"></span>
+                </div>
+                <div class="circle">
+                  <span class="yellow box1"></span>
+                </div>
+                <div class="circle">
+                  <span class="green box1"></span>
+                </div>
+              </div>
+              <div class="card__content">
+              </div>
+            </div>
+            <div class="biaoyu3"><div class="hello"></div></div>
+        <div class="card_content">
+            <span class="card_title" id="title3">标     题</span>
+                <span class="card_subtitle">这是一段关于xxx的介绍，详情请点击查看。</span>
+                <p class="card_description">以化学为例，化学家发现有两种氨基酸分子，他们的化学组成完全相同，区别只是原子的排列方式，他们被称之为L型和D型旋光异构体。理论上来说，由于他们的化学性质是相同的，都可以组成蛋白质。以化学为例，化学家发现有两种氨基酸分子，他们的化学组成完全相同，区别只是原子的排列方式，他们被称之为L型和D型旋光异构体。理论上来说，由于他们的化学性质是相同的，都可以组成蛋白质。以化学为例，化学家发现有两种氨基酸分子</p>
+        </div>
+        </article>
+        <div class="out">
+          <div class="inner">
+            <div class="img">
+              <img src="./1colour__.png" alt="" />
+            </div>
+            <div class="img">
+              <img src="./2colour__.png" alt="" />
+            </div>
+            <div class="img">
+              <img src="./3colour__.png" alt="" />
+            </div>
+            <div class="img">
+              <img src="./4colour__.png" alt="" />
+            </div>
+            <div class="img">
+              <img src="./5color_.png" alt="" />
+            </div>
+            <div class="img">
+              <img src="./6color_.png" alt="" />
+            </div>
+            <div class="img">
+              <img src="./colour__.png" alt="" />
+            </div>
+          </div>
+          <div class="arrow">
+            <i class="fas fa-chevron-left left"></i>
+            <i class="fas fa-chevron-right right"></i>
+          </div>
+          <div class="button">
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+          </div>
+        </div>
+        <article class="card" id="card4">
+          <div class="temporary_text">
+            <div class="tools">
+              <div class="circle">
+                <span class="red box1"></span>
+              </div>
+              <div class="circle">
+                <span class="yellow box1"></span>
+              </div>
+              <div class="circle">
+                <span class="green box1"></span>
+              </div>
+            </div>
+            <div class="card__content">
+            </div>
+          </div>
+          <div class="biaoyu4"><div class="hello"></div></div>
+      <div class="card_content">
+          <span class="card_title" id="title4">标     题</span>
+              <span class="card_subtitle">这是一段关于xxx的介绍，详情请点击查看。</span>
+              <p class="card_description">以化学为例，化学家发现有两种氨基酸分子，他们的化学组成完全相同，区别只是原子的排列方式，他们被称之为L型和D型旋光异构体。理论上来说，由于他们的化学性质是相同的，都可以组成蛋白质。以化学为例，化学家发现有两种氨基酸分子，他们的化学组成完全相同，区别只是原子的排列方式，他们被称之为L型和D型旋光异构体。理论上来说，由于他们的化学性质是相同的，都可以组成蛋白质。以化学为例，化学家发现有两种氨基酸分子</p>
+      </div>
+      </article>
+      <article class="card" id="card5">
+        <div class="temporary_text">
+          <div class="tools">
+            <div class="circle">
+              <span class="red box1"></span>
+            </div>
+            <div class="circle">
+              <span class="yellow box1"></span>
+            </div>
+            <div class="circle">
+              <span class="green box1"></span>
+            </div>
+          </div>
+          <div class="card__content">
+          </div>
+        </div>
+        <div class="biaoyu5"><div class="hello"></div></div>
+    <div class="card_content">
+        <span class="card_title" id="title5">标     题</span>
+            <span class="card_subtitle">这是一段关于xxx的介绍，详情请点击查看。</span>
+            <p class="card_description">以化学为例，化学家发现有两种氨基酸分子，他们的化学组成完全相同，区别只是原子的排列方式，他们被称之为L型和D型旋光异构体。理论上来说，由于他们的化学性质是相同的，都可以组成蛋白质。以化学为例，化学家发现有两种氨基酸分子，他们的化学组成完全相同，区别只是原子的排列方式，他们被称之为L型和D型旋光异构体。理论上来说，由于他们的化学性质是相同的，都可以组成蛋白质。以化学为例，化学家发现有两种氨基酸分子</p>
+    </div>
+    </article>
+    <article class="card" id="card6">
+      <div class="temporary_text">
+        <div class="tools">
+          <div class="circle">
+            <span class="red box1"></span>
+          </div>
+          <div class="circle">
+            <span class="yellow box1"></span>
+          </div>
+          <div class="circle">
+            <span class="green box1"></span>
+          </div>
+        </div>
+        <div class="card__content">
+        </div>
+      </div>
+      <div class="biaoyu6"><div class="hello"></div></div>
+  <div class="card_content">
+      <span class="card_title" id="title6">标     题</span>
+          <span class="card_subtitle">这是一段关于xxx的介绍，详情请点击查看。</span>
+          <p class="card_description">以化学为例，化学家发现有两种氨基酸分子，他们的化学组成完全相同，区别只是原子的排列方式，他们被称之为L型和D型旋光异构体。理论上来说，由于他们的化学性质是相同的，都可以组成蛋白质。以化学为例，化学家发现有两种氨基酸分子，他们的化学组成完全相同，区别只是原子的排列方式，他们被称之为L型和D型旋光异构体。理论上来说，由于他们的化学性质是相同的，都可以组成蛋白质。以化学为例，化学家发现有两种氨基酸分子</p>
+  </div>
+  </article>
+            </div>
+        </div>
+    </section>
+    
+  </body>
+</main>
+<footer>
+    <div class="container">
+      <div class="footer-section">
+        <h3>联系我们</h3>
+        <ul class="contact-list">
+          <li fff><i class="fa fa-phone"></i>负责人：帅捷</li>
+          <li fff><i class="fa fa-map-marker"></i> 地址：中国四川省成都市</li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <ul class="footer-links">
+          <li><a href="#">退款政策</a></li>
+          <li><a href="#">隐私政策</a></li>
+          <li><a href="#">服务条款</a></li>
+          <li><a href="#">常见问题</a></li>
+          <li><a href="#">反馈我们</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3 class="size">订阅我们</h3>
+        <form class="subscribe-form">
+          <input type="email" placeholder="输入您的电子邮件地址" class="input1">
+          <button data-text="Awesome" class="button">
+            <span class="actual-text">&nbsp;ThankYou&nbsp;</span>
+            <span class="hover-text" aria-hidden="true">&nbsp;ThankYou&nbsp;</span>
+        </button>
+        </form>
+      </div>
+    </div>
+    </div>
+  </footer>
+  <script>
+
+  let arrow = document.querySelectorAll(".arrow");
+  for (var i = 0; i < arrow.length; i++) {
+    arrow[i].addEventListener("click", (e)=>{
+   let arrowParent = e.target.parentElement.parentElement;
+   arrowParent.classList.toggle("showMenu");
+    });
+  }
+
+  let sidebar = document.querySelector(".sidebar");
+  let sidebarBtn = document.querySelector(".bx-menu");
+  console.log(sidebarBtn);
+  sidebarBtn.addEventListener("click", ()=>{
+    sidebar.classList.toggle("close");
+  });
+  var img = document.querySelectorAll(".img");
+  var left = document.querySelector(".left");
+  var right = document.querySelector(".right");
+  var buttons = document.querySelectorAll("p");
+
+  //设置一个数组，用来存id
+  idArr = ["first", "second", "right", "left", "left", "left", "last"];
+
+  //设置一个变量用来当图片的索引
+  var index = 0;
+
+  initialize();
+
+  //设置一个定时器，让图片轮播
+  var timer = setInterval(next, 3000);
+
+  //给箭头绑定点击事件
+  left.addEventListener("click", prev);
+  //当鼠标放到箭头上时，让定时器停止
+  left.addEventListener("mouseover", () => {
+    clearInterval(timer);
+    timer = null;
+  });
+  //当鼠标离开箭头时，让定时器重新开始
+  left.addEventListener("mouseout", () => {
+    timer = setInterval(next, 3000);
+  });
+
+  right.addEventListener("click", next);
+  right.addEventListener("mouseover", () => {
+    clearInterval(timer);
+    timer = null;
+  });
+  right.addEventListener("mouseout", () => {
+    timer = setInterval(next, 3000);
+  });
+
+  //给小方块添加点击事件
+  for (let i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener("mousedown", () => {
+      //在用户点击的时候关闭定时器
+      clearInterval(timer);
+      timer = null;
+      //这里需要判断用户点击的小方块与当前图片的索引之差，如果
+      //大于0，则表明用户需要更换的是后面的图片，反之，表明用户
+      //需要更换之前也就是前面的图片
+      if (index > i) {
+        let x = index - i;
+        while (x--) {
+          prev();
+        }
+      } else if (index < i) {
+        let x = i - index;
+        while (x--) {
+          next();
+        }
+      }
+    });
+  }
+
+  //创建切换图片的函数
+  function prev() {
+    //切换上一张也就是让数组的最后一个元素变成第一个元素
+    idArr.push(idArr.shift());
+    initialize();
+    if (index === 0) {
+      index = buttons.length - 1;
+    } else {
+      index--;
+    }
+    clearColor();
+  }
+  function next() {
+    //跟上面反过来
+    idArr.unshift(idArr.pop());
+    initialize();
+    if (index === buttons.length - 1) {
+      index = 0;
+    } else {
+      index++;
+    }
+    clearColor();
+  }
+
+  //创建一个函数用来让小方块跟随图片运动
+  function clearColor() {
+    for (let i = 0; i < buttons.length; i++) {
+      buttons[i].style.backgroundColor = "silver";
+    }
+    //让当前的索引变色
+    buttons[index].style.backgroundColor = "rgb(20, 134, 187)";
+  }
+
+  //创建一个函数用来初始化图片
+  function initialize() {
+    for (let i = 0; i < img.length; i++) {
+      img[i].id = idArr[i];
+    }
+  }
+  </script>
+
+</body>
+</html>
