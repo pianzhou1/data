@@ -1,0 +1,228 @@
+1概述
+CookMedia网站包含新闻资讯、论坛、经验文章、在线游戏、招聘、数媒专业和用户中心七个大的模块，面向所有计算机、数字媒体专业师生以及相关业界人士，具有一定的专业需求和技能。
+2设计规范说明
+2.1界面尺寸
+根据CookMedia的项目形态来看，更多的应该是教育群体的使用，目前有四个常用的分辨率尺寸：1024px*640px、1280px*800px、1440px*900px、1680px*1050px，而其中1440px*900px是更多网站使用场景下（如便携式笔记本电脑）的主流尺寸。
+故设计稿的尺寸规范为：所有界面画板宽度数值Width=1440px，高度不限，但最低尺寸按首屏为1440px*1080px的规定进行设计。因可视内容区域宽度应在960～1200px范围内，根据尽量达到更多的内容展示、清晰的操作区域、靠拢沉浸式体验的三个设计目标，规范为最大值1200px，可视内容区域左右各保留120px间距，中间区域即为焦点区域。
+2.2界面风格
+
+图21界面主体风格
+根据学习、工作的经验，秉承高效设计、优质体验、简约流程、快速记忆、快速认知的设计原则，使用系统的界面设计方法。
+界面风格如图21所示。
+2.3色彩方案
+
+图22色彩说明
+1.11.21.3系统的设计方法首先需要在颜色上进行明确，根据本产品具有的校园、教育、互联网气质，选取蓝色为主色彩（默认颜色），搭配不同的辅助颜色，可以快速、清晰的设计各个控件，进而通过各种控件组合成完整的界面。主色是产品表现的灵魂色彩，更是具有高强识别性的信号。
+字体色彩则是用不同程度的颜色，体现不同含义的字段，通过其重要性的不同，做不同的视觉引导。
+一级标题、正文使用#1F2D3D，二级标题使用#535353，次于二级信息（如日期信息、导航文字）使用#B5B5B5，状态、标识信息文字使用#5E6D82，其他辅助信息、表格信息使用#99A9BF。
+涉及到卡片类型的组件，需要添加Hover状态，即鼠标指向卡片时的悬浮效果，此时需增加阴影效果：#000000，12%的透明度，y方向扩展2px，4px模糊。
+色彩说明如图22所示。
+2.4图标说明
+
+图23 图标库
+图标因其具有明显示意、简洁造型、可塑性强的特点，被大量应用在界面的操作中。对于图标制作，目前市场上虽然仍使用导出图片的形式进行使用，但图形技术的革新使.svg格式的图标兴起，更多的前沿互联网公司都已经使用.svg内容开发项目。
+.svg格式区别于.png、.jpg格式来说，真正意义上的实现了矢量。利用Adobe Illustrator绘图软件进行矢量制图，在.svg中可以保留所有的图形信息，通过一定的标准，可编译、描述二维矢量图形，这也造就了其尺寸更小、占用更小空间、压缩性更强、在任何的分辨率下，都可以高质量显示的几大优势。
+制作的图标库如图23所示。
+制作.svg格式文件需注意以下六点：
+（1）闭合：图形需要封闭，不能出现未闭合图形
+（2）合并：如果有多个图形，或图形中存在布尔关系，应对图形进行合并且扩展
+（3）大小：在限定边框内绘制完成图形，且尽量少的出现空隙
+（4）节点：尽量减少图形中的节点，使图形信息简介、清晰。
+（5）填色：完成设计的图形需填充默认颜色，建议避免使用渐变、透明度等复杂信息
+（6）轮廓化：将描边转化为闭合图形，通过对象-路径-轮廓画描边方式处理图形描边。
+示例：点赞图标svg格式代码
+<svg width="128px" height="127px" viewBox="0 0 128 127" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+ <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="规范" stroke="none" stroke-width="1" 
+fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-138.000000, -1130.000000)" 
+fill="#4A4A4A" fill-rule="nonzero">
+            <g id="Group-4" 
+transform="translate(138.000000, 1129.000000)">
+                <g id="点赞" transform="translate(0.000000, 1.000000)">
+                    <path d="M125.8,48.3698558 C123.55,
+45.1740498 119.866667,43.27654 116.033333,43.27654 
+L90.3333333,42.893709 L95.9833333,17.7433814 
+C97.35,… 119.75,55.3939712 119.35,56.5091743 Z" id="Shape"></path></g>
+            </g>
+        </g>
+    </g>
+</svg>
+1.41.51.62.5字体设计
+考虑到各系统的字体兼容，做出以下的文字规范：
+中文字体：
+Mac OS优先使用PingFang SC；备用Hiragino Sans GB；次级备用Microsoft YaHei。
+英文字体：
+优先使用Helvetica Neue；备用Helvetica；次级备用Arial。
+字体大小：
+大标题：24px，正文标题：20px，标题：18px，小标题：16px，正文：14px，辅助文字：13px。
+卡片字体：
+标题：16px、加粗，一级：16px，二级：14px，辅助文字：13px。
+以上字体在实际运用中应配合色彩表共同设置。
+具体字体样式如图24所示：
+
+图24 字体规范
+3各模块设计介绍
+3.43.53.633.1首页
+首页中将介绍导航、网站名片两部分全局内容，以及首页部分通用内容的CSS布局。布局中会详述边距的规范设定，使用Core Graphics结构定义边框矩形。对于边框，通常表示由原点(CGPoint，x和y)和大小(CGsize，宽度和高度)组成的CGRect矩形。
+导航设计详情如图3-1所示。
+
+图31 导航
+<header>部分的导航栏、网站Logo、搜索框，用户个人信息的展示，其中， Logo位于焦点内容区域起点，即1440px宽画布内，x=120处，与导航文字按钮间距70px，导航按钮各间距为45px。
+搜索框由<search>类型的input框和button组成。
+图标按钮size：
+（20px，20px），距上、下、右各10px。
+.Shape { 
+width: 20px; 
+height: 20px; 
+background-color: #b5b5b5;
+ }
+输入框为圆角矩形：
+.Input-Background {
+  width: 180px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: #000000;
+} 
+
+图32 登录
+游客访问网站，通过导航可进行登录、注册的操作，用户通过邮箱注册成为网站用户，登录页、注册页布局相似，表单距离导航80px且水平居中显示在页面内，背景中添加插图，用于补充空白区域，设计详情如图32所示。
+输入框为圆角矩形：
+.input {
+  width: 506px;
+  height: 402px;
+  background-color: #ffffff;
+  border: solid 1px #e6e6e6;
+}
+
+图33 轮播
+轮播区的运营图尺寸为：1200px*405px，上传的图片信息应严格按照该尺寸设计，不得使图片有拉伸的现象，应使用高质量图片。轮播控件的指示器嵌于容器内部，切换箭头显示时机为arrow:always，设计详情如图33所示。
+
+图34 区块标题
+新区快标题有文字字段、文字按钮、分割线（3px）三部分，该区域上下间距均为30px，设计详情如图34所示。
+标题样式：
+label.frame = CGRectMake(125, 525, 73, 25);
+label.text = @"区块标题";
+label.font = [UIFont fontWithName:@"PingFangSC-Semibold" size:18];
+label.textColor = [UIColor colorWithRed:83/255 green:83/255 blue:83/255 alpha:1];
+.title {
+ width: 576px; 
+height: 33px; 
+font-family: PingFangSC; 
+font-size: 24px; 
+font-weight: 600; 
+font-style: normal;
+ font-stretch: normal; 
+line-height: normal; 
+letter-spacing: normal;
+ text-align: left; 
+}
+文字按钮：
+label.frame = CGRectMake(1270, 529, 45, 20);
+label.text = @"按钮名称>>";
+label.font = [UIFont fontWithName:@"PingFangSC-Semibold" size:14];
+label.textColor = [UIColor colorWithRed:74/255 green:144/255 blue:226/255 alpha:1];
+
+图35 Tab分类菜单模块
+Tabs分类菜单模块中的按钮从焦点位（x=120px）开始，该区域距上部分区域15px，距下部分30px。按钮均为100px*34px、圆角20px的圆角矩形，文本内容居中显示，按钮间距离均为30px，设计详情如图35所示。
+
+图36 网站名片
+网站名片<footer>包含中英文logo、联系方式、简介等基本信息。
+该区域高度Hight=100px，内容居中显示，设计详情如图36所示。
+3.2新闻资讯和经验文章
+资讯类模块均定义为W*H=576px*437px区域，每行显示两条信息，间距20px，且每行的两条信息居中显示新闻资讯页如图37所示。
+
+图37 新闻资讯
+.P1 {
+  width: 576px;
+  height: 324px;
+  object-fit: contain;
+}
+<!-- jpg -->
+<img src="img/p-1.jpg"
+     srcset="img/p-1@2x.jpg 2x
+     class="P1">
+<!-- png -->
+<img src="img/p-1.png"
+     class="P1">
+每个封面模块包含的信息有：
+标题：
+label.frame = CGRectMake(134, 922, 576, 33);
+label.text = @"标题";
+label.font = [UIFont fontWithName:@"PingFangSC-Semibold" size:24];
+label.textColor = [UIColor colorWithRed:83/255 green:83/255 blue:83/255 alpha:1];
+发布时间：#535353，14pt，Regular
+作者名：#4A90E2，14pt，按钮类型（连接至该用户主页）
+简介：显示两行文字，超出部分缩略显示。
+
+
+图38 详情页
+点击封面可查看资讯详细内容，详细内容包含标题区、内容区、功能区、评论区。详情页采用左右式布局，将焦点区分割成890px+10px+300px，左侧用于显示主要内容，右侧可嵌入更多模块，便于后期迭代开发的新需求增删，设计详情如图38、图39所示。经验文章页与新闻资讯布局相同，可直接复用。
+
+图39详情功能和评论区
+3.3论坛
+该模块包含有话题类型表、论坛话题表、话题回复表。共计3个表，其中的论坛话题表和话题回复表为核心表，用于存放发布的话题和话题回复信息，设计详情如图317所示。
+故根据论坛页面的信息特性，即论坛中的消息列表包含的id、type_id、title、though_count、create_tiome、author_id等核心字段，使用Table表格对数据进行约束，便于展示多条结构类似的数据，可对数据进行排序、筛选、对比或其他自定义操作，设计详情如图310所示。
+
+图310 论坛
+内容顶部是填充了背景色的标题区域，其参数为：.Rectangle-6 { width: 820px; height: 50px; border-radius: 5px; background-color: #e5e9f2; }
+列表中每行的大小设定为820px*50px，其中，标签前边距20px，与标题间距15px，标题上下间距15px，左对齐。
+由type属性来选择tag的类型，也可以通过color属性来自定义背景色。
+type.a { 
+width: 48px; 
+height: 24px;
+ border-radius: 4px; 
+background-color: #e7faef; 
+border: solid 1px #bef2d4; 
+}
+.HTML Title{
+  width: 244px;
+  height: 20px;
+  font-family: PingFangSC;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+}
+
+图311 内容编辑页面
+对于站内所有发布上传的功能，提供统一的内容编辑页面，设计详情如图311所示。
+编辑页面内容居中显示，宽度即位焦点区域的宽度，编辑内容的各个标题在x=386处左对齐，后紧接输入框、单选按钮、选择器、等组件，形成表单内容，按钮间距10px。
+3.4在线游戏
+
+图312 在线游戏
+在线游戏中复用轮播组件、区块标题、tab分类菜单，新增封面卡片（GameCard），主界面设计详情如图312所示。
+卡片矩形为260px*227px，3px圆角弧度，含有图片、时间、标题、作者四个字段。
+.Rectangle-1 {
+  width: 260px;
+  height: 227px;
+  border-radius: 3px;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.04), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
+  background-color: #ffffff;
+  border: solid 1px #e6e6e6;
+}
+卡片内所有边距均为20px，封面图片居中显示，暂定200px*125px，该情况下图片前后编剧为30px。卡边应添加Hover的.js效果，具体效果参照阴影规范即可，设计详情如图313所示。
+
+图313 游戏卡片
+3.5招聘
+招聘模块包含工作类型、简历、城市、薪资、招聘5个数据表，根据创建的字段，可复用卡片封面类型，并作一定的前端数据处理，招聘页面如图314所示。
+
+图314招聘
+招聘信息详情页与资讯详情页布局相同，但在右侧追加新功能模块，右侧区域由作者信息、更多职位，两部分组成。新功能区信息包含Logo图（60%*logo.size）、title、company、create_time数据信息，设计详情如图315所示。
+
+图315 招聘卡片
+复用卡片时，将可配置定义的内容展示区尺寸更改为100*100，用于显示Logo，Title显示两行，附加company、detail_address、is_valid、city_id、salary_id等字段信息。Title、company、city三个字段有5px的间距，create_time距下边界20px，logo与一级标题10px，其他边距均为20px，设计详情如图316所示。
+
+图316 更多职位
+3.6用户中心
+用户中心将个人简要信息作全局显示，常驻在头部，提供修改信息的按钮，并用Tabs 标签页对用户的信息、操作等进行统计与管理，一级分类下存在有二级分类的情况，设计详情如图317所示。
+
+图317 个人中心 
+图318 我的发布
+一级Tabs标签页距上部分区域30px，每个tab的size为88px*42px，文本信息居中显示，二级Tabs标签页与一级tabs的间距为20px，尺寸相同，选中时底部显示hight = 3px的矩形，设计详情如图318所示。 
+
